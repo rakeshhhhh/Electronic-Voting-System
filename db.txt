@@ -1,0 +1,141 @@
+/*
+SQLyog Ultimate v11.33 (64 bit)
+MySQL - 5.5.8-log : Database - dbvoting
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`dbvoting` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `dbvoting`;
+
+/*Table structure for table `tbl_candidate` */
+
+DROP TABLE IF EXISTS `tbl_candidate`;
+
+CREATE TABLE `tbl_candidate` (
+  `candid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `age` int(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `ename` varchar(50) NOT NULL,
+  `dist` varchar(50) NOT NULL,
+  `party` varchar(50) NOT NULL,
+  `symbol` varchar(100) NOT NULL,
+  `contact` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`candid`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_candidate` */
+
+insert  into `tbl_candidate`(`candid`,`name`,`age`,`address`,`ename`,`dist`,`party`,`symbol`,`contact`,`password`,`status`) values (2,'manoj',50,'gjrsmjr','State Assembly (Vidhan Sabha)','Pathanamthitta','LDF','images/fish1.png','8795463210','123','Approved'),(3,'bineesh bastin',26,'mattancheri','Parliamentary General Elections (Lok Sabha)','Ernakulam','BJP','images/bjp.jfif','8794562130','123',NULL);
+
+/*Table structure for table `tbl_election` */
+
+DROP TABLE IF EXISTS `tbl_election`;
+
+CREATE TABLE `tbl_election` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ename` varchar(50) NOT NULL,
+  `pdate` date NOT NULL,
+  `status` int(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_election` */
+
+insert  into `tbl_election`(`id`,`ename`,`pdate`,`status`) values (1,'Kerala Legislative Assembly election, 2021','2021-10-02',0),(2,'muncipality election','2021-10-04',1);
+
+/*Table structure for table `tbl_login` */
+
+DROP TABLE IF EXISTS `tbl_login`;
+
+CREATE TABLE `tbl_login` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `usertype` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_login` */
+
+insert  into `tbl_login`(`id`,`username`,`password`,`usertype`) values (1,'admin@gmail.com','admin','admin'),(2,'	A. Vijayaraghavan','123','Candidate'),(9,'athul','123','Voter'),(10,'hari krishnan','123','Voter'),(11,'manoj','123','Candidate'),(12,'manoj','123','Candidate'),(13,'yjtgvtf','7t90p','Voter'),(14,'bineesh bastin','123','Candidate'),(15,'saranya','123','Voter');
+
+/*Table structure for table `tbl_voter` */
+
+DROP TABLE IF EXISTS `tbl_voter`;
+
+CREATE TABLE `tbl_voter` (
+  `voterid` bigint(50) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `age` int(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `dist` varchar(50) NOT NULL,
+  `place` varchar(50) NOT NULL,
+  `contact` varchar(50) NOT NULL,
+  `idproof` varchar(100) NOT NULL,
+  `status` int(50) NOT NULL,
+  PRIMARY KEY (`voterid`)
+) ENGINE=InnoDB AUTO_INCREMENT=11116 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_voter` */
+
+insert  into `tbl_voter`(`voterid`,`name`,`age`,`address`,`dist`,`place`,`contact`,`idproof`,`status`) values (11111,'athul',18,'nohouse','Thiruvananthapuram','Kanakakunn','5267891478','images/chart2.jpg',1),(11112,'hari krishnan',20,'keezhe house','Thrissur','kunnamkulam','6598742130','images/chart1.jpg',1),(11113,'yjtgvtf',785,'57f785k845','Malappuram','kt7ik','9876543210','images/fish1.png',1),(11115,'saranya',15,'dwgwsgdwsgwhwbbvbdadsfadf','Wayanad','ggns','5698741230','images/bjp.jfif',1);
+
+/*Table structure for table `tbl_winner` */
+
+DROP TABLE IF EXISTS `tbl_winner`;
+
+CREATE TABLE `tbl_winner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `eid` int(11) NOT NULL,
+  `candid` int(11) NOT NULL,
+  `party` varchar(50) NOT NULL,
+  `count` int(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_winner` */
+
+/*Table structure for table `tblpollcount` */
+
+DROP TABLE IF EXISTS `tblpollcount`;
+
+CREATE TABLE `tblpollcount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `candid` int(50) NOT NULL,
+  `count` int(50) NOT NULL,
+  `eid` int(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tblpollcount` */
+
+/*Table structure for table `tblpolling` */
+
+DROP TABLE IF EXISTS `tblpolling`;
+
+CREATE TABLE `tblpolling` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `eid` int(50) NOT NULL,
+  `voterid` int(50) NOT NULL,
+  `candid` int(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tblpolling` */
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
